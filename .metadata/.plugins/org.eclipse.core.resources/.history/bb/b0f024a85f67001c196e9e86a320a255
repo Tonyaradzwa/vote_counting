@@ -1,0 +1,106 @@
+package vote_counting_java;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Vote {
+
+	public int votingPopulation;
+	public final int numberOfCandidates = 9;
+	public boolean isValid;
+	private String voteReceipt;
+	public static ArrayList<String> numberList = new ArrayList<String>(); //instantiate it to an empty list first
+	public static ArrayList<String> voteReceipts = new ArrayList<String>();
+	private int candidateNumber; // is made private so NOONE can meddle with the private number 
+	
+	// constructor
+	/**
+	 * This creates a vote object 
+	 */
+	public Vote(int candidateNumber) {
+		// if input is invalid (not within the range) then default to zero always
+		if (candidateNumber <= 0 || candidateNumber > numberOfCandidates) {
+			this.candidateNumber = 0;
+			isValid = false;
+		} else {
+			this.candidateNumber = candidateNumber;	
+			isValid = true;
+		}
+		
+		createVoteReceipt();
+		
+	}
+//	public int generateRandomNumber(int start, int end) {
+//		Random randInt = new Random();
+//		return start + randInt.nextInt(end - start);
+//	}
+	// other useful methods
+	/**
+	 * This method needs to be public so that 
+	 * everyone can verify that the method is indeed 
+	 * working as it should
+	 * 
+	 * Could use a hashtable? to make the search more efficient
+	 * since order is not required here
+	 */
+	public static String createUniqueRandomNumber() {
+		Random randInt = new Random();
+		int randNum = 100 + randInt.nextInt(1000 - 100);
+		
+		// continues to search for a number that has not been used before
+		// unfortunately, this needs to be done since we do not want any duplicate strings
+		while (numberList.contains(String.valueOf(randNum))) {
+			randNum = 100 + randInt.nextInt(1000 - 100);
+		}
+		
+		numberList.add(String.valueOf(randNum));
+		return String.valueOf(randNum);
+	}
+	/**
+	 * This method creates a vote receipt corresponding
+	 * to the current vote.
+	 * 
+	 * The vote receipt is always unique
+	 * 
+	 */
+	public String createVoteReceipt() {
+		voteReceipt = String.valueOf(candidateNumber) + String.valueOf(createUniqueRandomNumber());
+		//System.out.println(voteReceipt);
+		voteReceipts.add(voteReceipt);
+		
+		
+		return voteReceipt;
+	}
+	// toString Method
+	public boolean isValidVote() {
+		return isValid;
+	}
+	
+	public String toString() {
+		return voteReceipt;
+	}
+	
+	// main method to test this class
+	/**
+	 * Creates new votes and prints out their corresponding 
+	 * vote receipts
+	 * 
+	 */
+	public static void main(String args[]) {
+		Vote newVote = new Vote(1);
+		Vote newVote1 = new Vote(0);
+		
+		// valid receipts
+		Vote newVote2 = new Vote(2);
+		Vote newVote3 = new Vote(1);
+		Vote newVote4 = new Vote(10); // should default to zero
+		System.out.println(newVote);
+		System.out.println(newVote1);
+		System.out.println(newVote2);
+		System.out.println(newVote3);
+		System.out.println(newVote4);
+		System.out.println(voteReceipts);
+		
+		
+	}
+
+}
