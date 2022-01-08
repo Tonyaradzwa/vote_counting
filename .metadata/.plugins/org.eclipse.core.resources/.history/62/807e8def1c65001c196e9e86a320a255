@@ -1,0 +1,57 @@
+package vote_counting_java;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Vote {
+
+	// your instance variables
+	public int votingPopulation;
+	public int numberOfCandidates;
+	public static ArrayList<String> numberList;
+	public ArrayList<String> voteReceipts;
+	private int candidateNumber; // is made private so NOONE can meddle with the private number 
+	
+	// your constructor
+	
+	/**
+	 * This creates a vote object 
+	 */
+	public Vote(int candidateNumber) {
+		this.candidateNumber = candidateNumber;
+	}
+	
+	// other useful methods
+	/**
+	 * This method needs to be public so that 
+	 * everyone can verify that the method is indeed 
+	 * working as it should
+	 * 
+	 * Could use a hashtable? to make the search more efficient
+	 * since order is not required here
+	 */
+	public static String createUniqueRandomNumber() {
+		Random randInt = new Random();
+		int randNum = randInt.nextInt();
+		
+		// continues to search for a number that has not been used before
+		while (numberList.contains(randNum)) {
+			randNum = randInt.nextInt();
+			
+		}
+		return String.valueOf(n);
+	}
+	/**
+	 * This method needs to be public so that 
+	 * everyone can verify that the method is indeed 
+	 * working as it should
+	 * 
+	 * the method creates a vote receipt given a vote
+	 */
+	public String createVoteReceipt() {
+		return candidateNumber + "";
+	}
+	// toString Method
+	
+	// main method to test this class
+
+}

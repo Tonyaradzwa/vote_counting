@@ -1,0 +1,20 @@
+package vote_counting_java;
+
+public class BallotBox {
+	// your instance variables
+	public int votingPopulation;
+	public int numberOfCandidates;
+	
+	// your constructor
+	public BallotBox(int votingPopulation) {
+		this.votingPopulation = votingPopulation;
+		
+		System.out.println("Enter a vote from 1 to" + numberOfCandidates);
+	}
+	
+	// other useful methods
+	
+	// toString Method
+	
+	// main method to test this class
+}
