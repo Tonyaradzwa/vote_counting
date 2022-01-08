@@ -2,6 +2,9 @@ package vote_counting_java;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class represents a vote made by a voter
+ */
 public class Vote {
 
 	public int votingPopulation;  
@@ -107,7 +110,7 @@ public class Vote {
 		
 		
 		// voided votes 
-		Vote newVote2 = new Vote(0);
+		Vote newVote2 = new Vote(0); 
 		Vote newVote3 = new Vote(10); 
 		
 		// receipts begin with 0
