@@ -8,11 +8,16 @@ import java.util.Random;
 public class Vote {
 
 	public int votingPopulation;  
-	public final int NUMBER_OF_CANDIDATES = 9;
+	public final static int NUMBER_OF_CANDIDATES = 9;
+	public final static Candidates CANDS = new Candidates(NUMBER_OF_CANDIDATES);
+	
 	public boolean isValid;
+	
 	private String voteReceipt;
-	public static ArrayList<String> numberList = new ArrayList<String>(); // contains the numbers to be used for the vote receipts
+	
+	private static ArrayList<String> numberList = new ArrayList<String>(); // contains the numbers to be used for the vote receipts
 	public static ArrayList<String> voteReceipts = new ArrayList<String>(); // the vote receipts in string form
+	
 	private int candidateNumber; // is made private so that no-one can access it
 	
 	// constructor
@@ -26,12 +31,18 @@ public class Vote {
 		if (candidateNumber < 1|| candidateNumber > NUMBER_OF_CANDIDATES) {
 			this.candidateNumber = 0;
 			isValid = false;
+			
+		// otherwise proceed with assigning to a candidate
 		} else {
 			this.candidateNumber = candidateNumber;	
 			isValid = true;
 		}
-		
+			
 		createVoteReceipt();
+		
+		incrementNumberOfVotes();
+		
+		 
 	}
 
 	/**
@@ -70,6 +81,11 @@ public class Vote {
 	}
 	
 	
+	private void incrementNumberOfVotes() {
+		// increments the value at the index number of the candidate
+		CANDS.candidateNumbers.set(candidateNumber, CANDS.candidateNumbers.get(candidateNumber) + 1);
+	}
+	
 	/**
 	 * This method reports if a vote is valid
 	 * 
@@ -100,26 +116,30 @@ public class Vote {
 	 */
 	public static void main(String args[]) {
 		
-		// valid votes
+		// testing valid votes
 		Vote newVote = new Vote(1);
 		Vote newVote1 = new Vote(5);
-		
 		// receipts begin with candidate number
 		System.out.println(newVote + " " + "isValid: " + newVote.isValidVote());
 		System.out.println(newVote1 + " " + "isValid: " + newVote1.isValidVote());
 		
 		
-		// voided votes 
+		// testing voided votes 
 		Vote newVote2 = new Vote(0); 
 		Vote newVote3 = new Vote(10); 
-		
 		// receipts begin with 0
 		System.out.println(newVote2 + " " + "isValid: " + newVote2.isValidVote());
 		System.out.println(newVote3 + " " + "isValid: " + newVote3.isValidVote());
 		
-		// all vote receipts should be added to the list
-		System.out.println("These are the votes: " + voteReceipts);
 		
+		// testing that votes are added up
+		new Vote(1); new Vote(2); new Vote(9); new Vote(1); new Vote(1); new Vote(9);
+		new Vote(9); new Vote(1); new Vote(1); new Vote(3);
+		// should print [2, 6, 1, 1, 0, 1, 0, 0, 0, 3]
+		System.out.println(CANDS);
+		
+		// testing that all vote receipts are added to the list
+		System.out.println("These are the votes: " + voteReceipts);
 		
 	}
 
