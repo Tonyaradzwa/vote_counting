@@ -37,7 +37,7 @@ public class Vote {
 			this.candidateNumber = candidateNumber;	
 			isValid = true;
 		}
-			
+		
 		createVoteReceipt();
 		
 		incrementNumberOfVotes();
