@@ -1,6 +1,7 @@
 package vote_counting_java;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 import java.io.*;
 
@@ -13,7 +14,7 @@ import java.io.*;
 public class BallotBox {
 	
 	public int votingPopulation; // total population of voters in this region
-	public int numberOfCandidates; // number of candidates in the election
+	public int numberOfCandidates = 9; // number of candidates in the election
 	public String region; // name of voting region
 	public int regionNumber; // the identification number of the ballot box (we need to make sure that the number is not duplicable)
 	public File directory = new File("voteFiles");
@@ -34,16 +35,17 @@ public class BallotBox {
 		this.region = region;
 		this.regionNumber = regionNumber;
 		
-		collectVotes();		
+		// collectVotes(); // use this method to get votes at the console	
+		collectVotesTest(); // use this method to generate random votes
 	}
 	
+	
 	/**
-	 * This collects the votes and stores them in files
+	 * Collects the votes made by the users and stores them in files
 	 * 
 	 */
 	public void collectVotes() {
 		File voteFile = new File(directory.getAbsolutePath() + File.separator + regionNumber + "_" + region + "_votes.txt");
-		// use this to print out the file path: System.out.println(voteFile.getAbsolutePath());
 		
 		try {
 			PrintWriter output = new PrintWriter(new FileOutputStream(voteFile));
@@ -70,7 +72,48 @@ public class BallotBox {
 					
 				// if a non-numeric character is entered by the admin, the ballot closes
 				} catch (InputMismatchException e) {
-					System.out.println("Ballot closed");
+					break;
+				}
+			}
+			output.close();
+			System.out.println("Ballot Box closed");
+				
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	/**
+	 * Creates random votes, collect them, and stores them in files
+	 * 
+	 */
+	public void collectVotesTest() {
+		File voteFile = new File(directory.getAbsolutePath() + File.separator + regionNumber + "_" + region + "_votes.txt");
+		
+		try {
+			PrintWriter output = new PrintWriter(new FileOutputStream(voteFile));
+			
+			// first 2 lines in the file are the region number and region name 
+			output.println(regionNumber); 
+			output.println(region + "\n"); 
+
+			Random randInt = new Random();
+			 
+			
+			// this will ask each voter to enter a vote
+			for (int i = 0; i < votingPopulation; i++) {
+
+				try {
+	
+					// this automatically adds the vote receipt to the list of votes
+					output.println(new Vote(randInt.nextInt(numberOfCandidates + 1))); 	// generates a random number from 0 to numberOfCandidates 
+					numberOfVotes = i + 1; // the total number of votes made in this region
+					
+				// if a non-numeric character is entered by the admin, the ballot closes
+				} catch (InputMismatchException e) {
+					break;
 				}
 			}
 			output.close();
@@ -80,6 +123,7 @@ public class BallotBox {
 		}
 		
 	}
+	
 	
 	/**
 	 * Prints out the number of votes made so far in the region.
@@ -93,9 +137,10 @@ public class BallotBox {
 	// main method to test this class
 	public static void main(String args[]) {
 		
-		System.out.println(new BallotBox(3, "Area1", 1));
-		System.out.println(Vote.voteReceipts);
-		System.out.println(new BallotBox(2, "Area2", 2));
-		System.out.println(Vote.voteReceipts);
+		// Note: use smaller voting population number when doing a demo on the console
+		System.out.println(new BallotBox(300, "Area1", 1));
+		System.out.println("These are the vote receipts: " + Vote.voteReceipts);
+		System.out.println(new BallotBox(200, "Area2", 2));
+		System.out.println("These are the vote receipts: " + Vote.voteReceipts);
 	}
 }
