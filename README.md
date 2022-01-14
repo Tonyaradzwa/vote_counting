@@ -40,8 +40,8 @@ A class that stores information on the candidates of the election
 Download the files onto your computer. 
 For a random sample of votes, simply run the BallotBox.java file
 For demonstration of the voting process at the console, go to line 40 and comment (out) accordingly.
-
-  // collectVotes(); // use this method to get votes at the console	
+	
+	// collectVotes(); // use this method to get votes at the console	
 	collectVotesTest(); // use this method to generate random votes
 
 Reduce the sample number of voters in the main method by changing the first parameter of the Ballot
