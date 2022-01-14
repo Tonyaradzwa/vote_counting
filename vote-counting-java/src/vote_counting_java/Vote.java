@@ -1,5 +1,7 @@
 package vote_counting_java;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -16,7 +18,8 @@ public class Vote {
 	private String voteReceipt;
 	
 	private static ArrayList<String> numberList = new ArrayList<String>(); // contains the numbers to be used for the vote receipts
-	public static ArrayList<String> voteReceipts = new ArrayList<String>(); // the vote receipts in string form
+	public static Map<String, Integer> voteReceipts = new HashMap<>(); // the hashmap stores the vote receipts (in string form) as keys
+																	   // with the value representing verification (0 for false and 1 for true)
 	
 	private int candidateNumber; // is made private so that no-one can access it
 	
@@ -76,7 +79,8 @@ public class Vote {
 	public String createVoteReceipt() {
 		voteReceipt = String.valueOf(candidateNumber) + String.valueOf(createUniqueRandomNumber());
 		
-		voteReceipts.add(voteReceipt);
+		voteReceipts.put(voteReceipt, 0);
+		
 		return voteReceipt;
 	}
 	

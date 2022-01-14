@@ -138,9 +138,9 @@ public class BallotBox {
 	public static void main(String args[]) {
 		
 		// Note: use smaller voting population number when doing a demo on the console
-		System.out.println(new BallotBox(300, "Area1", 1));
+		System.out.println(new BallotBox(20, "Area1", 1));
 		System.out.println("These are the vote receipts: " + Vote.voteReceipts);
-		System.out.println(new BallotBox(200, "Area2", 2));
+		System.out.println(new BallotBox(10, "Area2", 2));
 		System.out.println("These are the vote receipts: " + Vote.voteReceipts);
 	}
 }
