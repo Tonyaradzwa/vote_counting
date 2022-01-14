@@ -74,4 +74,3 @@ The regional report on votes is still available and the total number of votes is
 ## Author
 
   - **Tonyaradzwa Chivandire** -
-    [LinkedIn](https://linkedin.com/in/tonyaradzwa)
