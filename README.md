@@ -69,7 +69,7 @@ Enter the votes for the next region
     Total number of votes: 5
     These are the vote receipts: [1289, 2411, 3976, 4323, 5617]
 
-The regional report on votes is still available and the total number of votes is updated. Notice the list of vote receipts contains receipts from all regions.
+The regional report on votes is still available and the total number of votes is updated. Notice the list of vote receipts contains receipts from all regions. The regional vote receipts are stored on files in the .../vote_counting/vote-counting-java/vote_files folder.
 
 ## Author
 
