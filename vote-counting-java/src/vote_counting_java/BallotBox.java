@@ -17,7 +17,7 @@ public class BallotBox {
 	public int numberOfCandidates = 9; // number of candidates in the election
 	public String region; // name of voting region
 	public int regionNumber; // the identification number of the ballot box (we need to make sure that the number is not duplicable)
-	public File directory = new File("voteFiles");
+	public String VOTE_FILE_DIRECTORY ="/vote-counting-java/src/vote_counting_java/voteFiles";
 	public int numberOfVotes; // the total number of votes made in this region
 	
 	
@@ -35,7 +35,7 @@ public class BallotBox {
 		this.region = region;
 		this.regionNumber = regionNumber;
 		
-		// collectVotes(); // use this method to get votes at the console	
+//		collectVotes(); // use this method to get votes at the console
 		collectVotesTest(); // use this method to generate random votes
 	}
 	
@@ -45,8 +45,9 @@ public class BallotBox {
 	 * 
 	 */
 	public void collectVotes() {
-		File voteFile = new File(directory.getAbsolutePath() + File.separator + regionNumber + "_" + region + "_votes.txt");
-		
+		File fullPath = new File(System.getProperty("user.dir") + VOTE_FILE_DIRECTORY);
+		File voteFile = new File(fullPath + File.separator + regionNumber + "_" + region + "_votes.txt");
+
 		try {
 			PrintWriter output = new PrintWriter(new FileOutputStream(voteFile));
 			
@@ -90,8 +91,9 @@ public class BallotBox {
 	 * 
 	 */
 	public void collectVotesTest() {
-		File voteFile = new File(directory.getAbsolutePath() + File.separator + regionNumber + "_" + region + "_votes.txt");
-		
+		File fullPath = new File(System.getProperty("user.dir") + VOTE_FILE_DIRECTORY);
+		File voteFile = new File(fullPath + File.separator + regionNumber + "_" + region + "_votes.txt");
+
 		try {
 			PrintWriter output = new PrintWriter(new FileOutputStream(voteFile));
 			
